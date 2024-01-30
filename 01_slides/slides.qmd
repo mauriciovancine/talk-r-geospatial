@@ -74,9 +74,7 @@ format:
 - Importar
 - Visualizar
 - Reprojetar
-- Operações de atributos
-- Operações espaciais
-- Operações geométricas
+- Operações (extração de dados, reamostragem, máscara e buffer)
 - Mapas
 :::
 :::
@@ -685,6 +683,60 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 
 :::footer
 [sf](https://r-spatial.github.io/sf/), [stars](https://r-spatial.github.io/stars/index.html)
+:::
+
+## Extração de dados para pontos
+
+<center>
+<img src="img/extrair.png" style="width:80%"/>
+</center>
+
+:::footer
+[R as GIS for Economists](https://tmieno2.github.io/R-as-GIS-for-Economists/)
+:::
+
+## Reamostragem de raster
+
+<center>
+<br>
+<img src="img/resample.png" style="width:100%"/>
+</center>
+
+:::footer
+[Lovelace et al. (2024)](https://r.geocompx.org/)
+:::
+
+## Máscara de raster por um vetor
+
+<center>
+<br><br>
+<img src="img/cropmask.png" style="width:100%"/>
+</center>
+
+:::footer
+[Lovelace et al. (2024)](https://r.geocompx.org/)
+:::
+
+## Buffer
+
+::: columns
+::: {.column width="45%"}
+<br>
+<center>
+<img src="img/buffer.jpg" style="width:100%"/>
+</center>
+:::
+
+::: {.column width="55%"}
+<br><br><br>
+<center>
+<img src="img/buffer.png" style="width:100%"/>
+</center>
+:::
+:::
+
+:::footer
+[Geographic Information Systems and Cartography](https://slcc.pressbooks.pub/maps/), [ArcGIS](https://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/buffer.htm)
 :::
 
 # Para saber mais
