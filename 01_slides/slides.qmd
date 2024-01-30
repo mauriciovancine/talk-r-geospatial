@@ -747,6 +747,32 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 [Lovelace et al. (2024)](https://r.geocompx.org/)
 :::
 
+## Spatial Data Science
+
+::: columns
+::: {.column width="40%"}
+<center>
+<img src="img/sds.jpg" href="https://r-spatial.org/book/" style="width:88%"/>
+</center>
+:::
+
+::: {.column width="60%"}
+
+- 17 capítulos
+
+- Dados espaciais (coordenadas, geometrias, atributos e cubos)
+
+- Ciência de dados espacial (sf, stars, mapas, grandes dados e nuvem)
+
+- Modelos (estatistica, padrão de pontos, interpolação, geoestatística, proximidade, autocorrelação, regressão espacial, econometria)
+
+:::
+:::
+
+:::footer
+[Pebesma & Bivand (2023)](https://r-spatial.org/book/)
+:::
+
 ## Trabalhando com dados espaciais
 
 ### R-Ladies São Paulo e Brasília
