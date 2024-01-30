@@ -747,6 +747,20 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 [Lovelace et al. (2024)](https://r.geocompx.org/)
 :::
 
+## Trabalhando com dados espaciais
+
+### R-Ladies São Paulo e Brasília
+
+Laís Brasileiro e Beatriz Milz
+
+<center>
+<img src="img/rladies.png" style="width:45%"/>
+</center>
+
+:::footer
+[RLadies - Trabalhando com dados espaciais no R](https://r-ladies-sao-paulo.github.io/2023-12-dados-espaciais/)
+:::
+
 ## Muito obrigado!
 
 ::: columns
