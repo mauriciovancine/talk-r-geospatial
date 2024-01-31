@@ -12,7 +12,7 @@ format:
     chalkboard: true
     execute:
       echo: true
-      eval: false
+      eval: true
       warning: false
       message: false
 ---
@@ -299,12 +299,23 @@ Datum + Sistema de Coordenadas (geográfico ou projetado)
 
 ### EPSG (*European Petroleum Survey Group*)
 
-<br>
+<br><br>
 
+::: columns
+::: {.column width="60%"}
 - EPSG: 4326 [WGS84 Geográfico](https://epsg.io/4326)
 - EPSG: 4674 [SIRGAS2000 Geográfico](https://epsg.io/4674)
 - EPSG: 32723 [WGS84 UTM23S](https://epsg.io/32723)
 - EPSG: 31983 [SIRGAS2000 UTM23S](https://epsg.io/31983)
+:::
+
+::: {.column width="40%"}
+<br><br><br><br><br>
+<center>
+![](img/espg-logo.png)
+</center>
+:::
+:::
 
 :::footer
 [epsg.io](https://epsg.io/)
@@ -313,6 +324,8 @@ Datum + Sistema de Coordenadas (geográfico ou projetado)
 ## *Global Positioning System* (GPS)
 
 Indica uma localização no planeta através de pontos ou linhas
+
+<br>
 
 ::: columns
 ::: {.column width="40%"}
@@ -337,9 +350,22 @@ Indica uma localização no planeta através de pontos ou linhas
 
 Indica uma localização no planeta através de pontos ou linhas
 
+<br>
+
+::: columns
+::: {.column width="40%"}
+
+- **Satélites**: localização e altitude
+- **Tipos de dados**: waypoint, route e track
+- **Formatos**: .gpx e .kml ou .kmz 
+:::
+
+::: {.column width="60%"}
 <center>
-<img src="img/gps.gif" style="width:50%"/>
+<img src="img/gps.gif" style="width:65%"/>
 </center>
+:::
+:::
 
 :::footer
 [Zanotta et al. (2019)](https://www.ofitexto.com.br/livro/processamento-de-imagens-de-satelite/)
@@ -630,7 +656,7 @@ Converter vetor-raster e vice-versa
 
 ## R
 
-O R é uma **linguagem de programação livre** (*open source*), direcionada à **manipulação, análise e visualização de dados**, com diversas **expansões** (*pacotes*) para o uso de **dados com formatos específicos** 
+O R é uma **linguagem de programação livre** (*open source*), direcionada à **manipulação, análise e visualização de dados**, com diversas **expansões** (*pacotes*) para operações e análises **específicas** 
 
 <center>
 <img src="img/r_logo.svg" style="width:40%"/>
@@ -651,6 +677,8 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 :::footer
 [RStudio](https://www.rstudio.com/)
 :::
+
+# Pacotes
 
 ## Pacotes (Hijmans team)
 
@@ -685,6 +713,49 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 [sf](https://r-spatial.github.io/sf/), [stars](https://r-spatial.github.io/stars/index.html)
 :::
 
+## Pacotes (Tennekes team)
+
+<br>
+<center>
+<img src="img/tmap2.png" style="width:42%"/>
+</center>
+
+:::footer
+[tmap](https://r-tmap.github.io/tmap/)
+:::
+
+# Reprojeção
+
+## Reprojeção
+
+<br>
+**Vetor**
+
+<center>
+<br>
+<img src="img/reprojection_vetor.png" style="width:100%"/>
+</center>
+
+:::footer
+[Lovelace et al. (2024)](https://r.geocompx.org/)
+:::
+
+## Reprojeção
+
+<br>
+**Raster**
+
+<center>
+<br>
+<img src="img/reprojection_raster.png" style="width:100%"/>
+</center>
+
+:::footer
+[Dorman (2022)](https://geobgu.xyz/r-2022/index.html)
+:::
+
+# Operações
+
 ## Extração de dados para pontos
 
 <center>
@@ -704,6 +775,17 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 
 :::footer
 [Lovelace et al. (2024)](https://r.geocompx.org/)
+:::
+
+## Reamostragem de raster
+
+<center>
+<br><br><br>
+<img src="img/resample_types.png" style="width:100%"/>
+</center>
+
+:::footer
+[Getreuer et al. (2011)](https://doi.org/10.5201/ipol.2011.g_lmii)
 :::
 
 ## Máscara de raster por um vetor
@@ -737,6 +819,45 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 
 :::footer
 [Geographic Information Systems and Cartography](https://slcc.pressbooks.pub/maps/), [ArcGIS](https://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/buffer.htm)
+:::
+
+# Mapas
+
+## Tipos de mapas no tmap
+
+### Estático
+
+```{r fig.align='center'}
+library(tmap)
+library(spData)
+
+tmap_mode(mode = "plot")
+
+map_nz <- tm_shape(nz) + tm_polygons()
+map_nz
+```
+
+:::footer
+[tmap](https://r-tmap.github.io/tmap/)
+:::
+
+## Tipos de mapas no tmap
+
+### Interativo
+
+```{r}
+tmap_mode(mode = "view")
+map_nz
+```
+
+<br>
+
+```{r fig.align='center',echo=FALSE}
+knitr::include_url("img/map.html")
+```
+
+:::footer
+[tmap](https://r-tmap.github.io/tmap/)
 :::
 
 # Para saber mais

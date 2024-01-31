@@ -55,6 +55,7 @@ pontos_sf <- sf::st_read("03_data/pontos_campinas.shp")
 pontos_sf
 
 plot(pontos_sf)
+plot(pontos_sf$geometry)
 
 ### tabela de atributos ----
 terra::geom(pontos_terra)
@@ -123,23 +124,33 @@ plot(elevation)
 ### terra ----
 pontos_terra_utm <- terra::project(x = pontos_terra, y = "EPSG:32723")
 pontos_terra_utm
+
+plot(pontos_terra)
 plot(pontos_terra_utm)
 
 ### sf ----
 pontos_sf_utm <- sf::st_transform(pontos_sf, crs = 32723)
 pontos_sf_utm
+
+plot(pontos_sf$geometry, pch = 20, axes = TRUE)
 plot(pontos_sf_utm$geometry, pch = 20, axes = TRUE)
 
 ## raster ----
+mapbiomas_terra
 res(mapbiomas_terra)[1]*3600*30
 
 mapbiomas_terra_utm <- terra::project(x = mapbiomas_terra, y = "EPSG:32723", method = "near", res = 10)
 mapbiomas_terra_utm
+
+plot(mapbiomas_terra)
 plot(mapbiomas_terra_utm)
 
 # operacoes -------------------------------------------------
 
 ## extrair valores para pontos ----
+plot(elevation)
+plot(pontos_terra, add = TRUE)
+
 pontos_sf_elev <- pontos_sf %>% 
     dplyr::mutate(elev = terra::extract(elevation, pontos_terra, ID = FALSE)[, 1])
 pontos_sf_elev
@@ -157,11 +168,11 @@ pontos_sf_elev_prec_temp <- pontos_sf_elev %>%
 pontos_sf_elev_prec_temp
 
 ## media dos rasters
-precipitation_annual <- terra::app(precipitation, sum)
+precipitation_annual <- terra::app(precipitation, sum, cores = 3)
 precipitation_annual
 plot(precipitation_annual)
 
-temperature_mean <- terra::mean(temperature)
+temperature_mean <- terra::app(temperature, mean, cores = 3)
 temperature_mean
 plot(temperature_mean)
 
@@ -184,34 +195,57 @@ plot(temperature_mean_campinas)
 ## reamostragem ----
 mapbiomas_terra_campinas_rea <- terra::resample(mapbiomas_terra_campinas, precipitation_annual_campinas, method = "near")
 mapbiomas_terra_campinas_rea
+
+plot(mapbiomas_terra_campinas)
 plot(mapbiomas_terra_campinas_rea)
 
 elevation_campinas_rea <- terra::resample(elevation_campinas, precipitation_annual_campinas)
 elevation_campinas_rea
+
+plot(elevation_campinas)
 plot(elevation_campinas_rea)
 
-precipitation_annual_campinas_rea <- terra::resample(precipitation_annual_campinas, elevation_campinas)
-precipitation_annual_campinas_rea
-plot(precipitation_annual_campinas_rea)
+precipitation_annual_campinas_rea_nea <- terra::resample(precipitation_annual_campinas, elevation_campinas, method = "near")
+precipitation_annual_campinas_rea_bil <- terra::resample(precipitation_annual_campinas, elevation_campinas, method = "bilinear")
+precipitation_annual_campinas_rea_cub <- terra::resample(precipitation_annual_campinas, elevation_campinas, method = "cubic")
+
+precipitation_annual_campinas_rea_nea
+precipitation_annual_campinas_rea_bil
+precipitation_annual_campinas_rea_cub
+
+plot(precipitation_annual_campinas)
+plot(precipitation_annual_campinas_rea_nea)
+plot(precipitation_annual_campinas_rea_bil)
+plot(precipitation_annual_campinas_rea_cub)
 
 ## buffer ----
 pontos_terra_buffer <- terra::buffer(pontos_terra, width = 1000)
 pontos_terra_buffer
 
+campinas_terra_buffer <- terra::buffer(campinas_terra, width = -1000)
+campinas_terra_buffer
+
 plot(campinas_terra)
+plot(campinas_terra_buffer, border = "red", add = TRUE)
 plot(pontos_terra, add = TRUE)
 plot(pontos_terra_buffer, add = TRUE)
 
 ## extrair dados para o buffer ----
-pontos_terra_buffer_amb <- terra::zonal(c(elevation_campinas_rea, precipitation_annual_campinas, temperature_mean_campinas),
-                                        pontos_terra_buffer, fun = "mean")
+ambiental <- c(elevation_campinas_rea, precipitation_annual_campinas, temperature_mean_campinas)
+ambiental
+plot(ambiental)
+
+pontos_terra_buffer_amb <- terra::zonal(ambiental, pontos_terra_buffer, fun = "mean")
 pontos_terra_buffer_amb
 
 pontos_sf_elev_prec_temp
 
 # maps --------------------------------------------------------------------
 
-## pontos ----
+## estatico ----
+tmap_mode(mode = "plot")
+
+### pontos ----
 map_pontos <- tm_shape(campinas_sf) +
     tm_polygons() +
     tm_shape(pontos_sf_elev_prec_temp) +
@@ -225,7 +259,7 @@ map_pontos <- tm_shape(campinas_sf) +
     tm_scalebar(breaks = c(0, 5, 10), text.size = 1, position = c("right", "bottom"))
 map_pontos
 
-## uso ----
+### raster ----
 map_uso <- tm_shape(mapbiomas_terra_campinas) +
     tm_raster(col.scale = tm_scale_categorical(values = c("#1f8d49", "#7a5900", "#519799",
                                                           "#edde8e", "#C27BA0", "#ffefc3",
@@ -240,11 +274,7 @@ map_uso <- tm_shape(mapbiomas_terra_campinas) +
     tm_scalebar(breaks = c(0, 5, 10), text.size = 1, position = c("right", "bottom"))
 map_uso
 
-## ambiental ----
-ambiental <- c(elevation_campinas_rea, precipitation_annual_campinas, temperature_mean_campinas)
-ambiental
-plot(ambiental)
-
+### varios raster ----
 map_elev <- tm_shape(elevation_campinas_rea) +
     tm_raster(col.scale = tm_scale_continuous(values = "-RdYlGn"),
               col.legend = tm_legend(title = "Elevação (m)", 
@@ -284,7 +314,35 @@ map_temp
 map <- tmap_arrange(map_uso, map_elev, map_prec, map_temp)
 map
 
-## export
+# export
 tmap_save(map, "03_data/map.png", width = 45, height = 30, units = "cm", dpi = 300, asp = FALSE)
+
+## interativo ----
+tmap_mode(mode = "view")
+
+map_pontos <- tm_shape(campinas_sf) +
+    tm_polygons() +
+    tm_shape(pontos_sf_elev_prec_temp) +
+    tm_bubbles(fill = "elev",
+               fill.scale = tm_scale_continuous(values = "-RdYlGn"),
+               fill.legend = tm_legend(title = "Elevação (m)", 
+                                       position = tm_pos_in("left", "top"),
+                                       reverse = TRUE))
+map_pontos
+
+map_uso <- tm_shape(mapbiomas_terra_campinas) +
+    tm_raster(col.scale = tm_scale_categorical(values = c("#1f8d49", "#7a5900", "#519799",
+                                                          "#edde8e", "#C27BA0", "#ffefc3",
+                                                          "#d4271e", "#db4d4f", "#ffaa5f",
+                                                          "#9c0027", "#2532e4", "#d082de")),
+              col.legend = tm_legend(title = "Classes", 
+                                     position = tm_pos_in("left", "top"))) +
+    tm_shape(campinas_sf) +
+    tm_borders()
+map_uso
+
+# exportar
+tmap::tmap_save(tm = map_pontos, filename = "03_data/map_pontos.html")
+tmap::tmap_save(tm = map_uso, filename = "03_data/map_uso.html")
 
 # end ---------------------------------------------------------------------

@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -570,13 +635,22 @@ E = 1/30000000</p>
 <section class="slide level2">
 <h2>Cartografia</h2>
 <h3>EPSG (<em>European Petroleum Survey Group</em>)</h3>
-<p><br></p>
+<p><br><br></p>
+<div class="columns">
+<div class="column" style="width:60%;">
 <ul>
 <li>EPSG: 4326 <a href="https://epsg.io/4326">WGS84 Geográfico</a></li>
 <li>EPSG: 4674 <a href="https://epsg.io/4674">SIRGAS2000 Geográfico</a></li>
 <li>EPSG: 32723 <a href="https://epsg.io/32723">WGS84 UTM23S</a></li>
 <li>EPSG: 31983 <a href="https://epsg.io/31983">SIRGAS2000 UTM23S</a></li>
 </ul>
+</div><div class="column" style="width:40%;">
+<br><br><br><br><br>
+<center>
+<img data-src="img/espg-logo.png">
+</center>
+</div>
+</div>
 <div class="footer">
 <p><a href="https://epsg.io/">epsg.io</a></p>
 </div>
@@ -584,6 +658,7 @@ E = 1/30000000</p>
 <section class="slide level2">
 <h2><em>Global Positioning System</em> (GPS)</h2>
 <p>Indica uma localização no planeta através de pontos ou linhas</p>
+<p><br></p>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
@@ -604,9 +679,20 @@ E = 1/30000000</p>
 <section class="slide level2">
 <h2><em>Global Positioning System</em> (GPS)</h2>
 <p>Indica uma localização no planeta através de pontos ou linhas</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><strong>Satélites</strong>: localização e altitude</li>
+<li><strong>Tipos de dados</strong>: waypoint, route e track</li>
+<li><strong>Formatos</strong>: .gpx e .kml ou .kmz</li>
+</ul>
+</div><div class="column" style="width:60%;">
 <center>
-<img src="img/gps.gif" style="width:50%">
+<img src="img/gps.gif" style="width:65%">
 </center>
+</div>
+</div>
 <div class="footer">
 <p><a href="https://www.ofitexto.com.br/livro/processamento-de-imagens-de-satelite/">Zanotta et al.&nbsp;(2019)</a></p>
 </div>
@@ -865,7 +951,7 @@ E = 1/30000000</p>
 </section>
 <section class="slide level2">
 <h2>R</h2>
-<p>O R é uma <strong>linguagem de programação livre</strong> (<em>open source</em>), direcionada à <strong>manipulação, análise e visualização de dados</strong>, com diversas <strong>expansões</strong> (<em>pacotes</em>) para o uso de <strong>dados com formatos específicos</strong></p>
+<p>O R é uma <strong>linguagem de programação livre</strong> (<em>open source</em>), direcionada à <strong>manipulação, análise e visualização de dados</strong>, com diversas <strong>expansões</strong> (<em>pacotes</em>) para operações e análises <strong>específicas</strong></p>
 <center>
 <img src="img/r_logo.svg" style="width:40%">
 </center>
@@ -882,6 +968,11 @@ E = 1/30000000</p>
 <div class="footer">
 <p><a href="https://www.rstudio.com/">RStudio</a></p>
 </div>
+</section></section>
+<section>
+<section class="title-slide slide level1 center">
+<h1>Pacotes</h1>
+
 </section>
 <section class="slide level2">
 <h2>Pacotes (Hijmans team)</h2>
@@ -913,6 +1004,46 @@ E = 1/30000000</p>
 </div>
 </section>
 <section class="slide level2">
+<h2>Pacotes (Tennekes team)</h2>
+<br>
+<center>
+<img src="img/tmap2.png" style="width:42%">
+</center>
+<div class="footer">
+<p><a href="https://r-tmap.github.io/tmap/">tmap</a></p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 center">
+<h1>Reprojeção</h1>
+
+</section>
+<section class="slide level2">
+<h2>Reprojeção</h2>
+<p><br> <strong>Vetor</strong></p>
+<center>
+<br> <img src="img/reprojection_vetor.png" style="width:100%">
+</center>
+<div class="footer">
+<p><a href="https://r.geocompx.org/">Lovelace et al.&nbsp;(2024)</a></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Reprojeção</h2>
+<p><br> <strong>Raster</strong></p>
+<center>
+<br> <img src="img/reprojection_raster.png" style="width:100%">
+</center>
+<div class="footer">
+<p><a href="https://geobgu.xyz/r-2022/index.html">Dorman (2022)</a></p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 center">
+<h1>Operações</h1>
+
+</section>
+<section class="slide level2">
 <h2>Extração de dados para pontos</h2>
 <center>
 <img src="img/extrair.png" style="width:80%">
@@ -928,6 +1059,15 @@ E = 1/30000000</p>
 </center>
 <div class="footer">
 <p><a href="https://r.geocompx.org/">Lovelace et al.&nbsp;(2024)</a></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Reamostragem de raster</h2>
+<center>
+<br><br><br> <img src="img/resample_types.png" style="width:100%">
+</center>
+<div class="footer">
+<p><a href="https://doi.org/10.5201/ipol.2011.g_lmii">Getreuer et al.&nbsp;(2011)</a></p>
 </div>
 </section>
 <section class="slide level2">
@@ -956,6 +1096,44 @@ E = 1/30000000</p>
 </div>
 <div class="footer">
 <p><a href="https://slcc.pressbooks.pub/maps/">Geographic Information Systems and Cartography</a>, <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/buffer.htm">ArcGIS</a></p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 center">
+<h1>Mapas</h1>
+
+</section>
+<section class="slide level2">
+<h2>Tipos de mapas no tmap</h2>
+<h3>Estático</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(spData)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">tmap_mode</span>(<span class="at">mode =</span> <span class="st">"plot"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>map_nz <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(nz) <span class="sc">+</span> <span class="fu">tm_polygons</span>()</span>
+<span id="cb1-7"><a href="#cb1-7"></a>map_nz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="slides_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch quarto-figure-center"><div class="footer">
+<p><a href="https://r-tmap.github.io/tmap/">tmap</a></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Tipos de mapas no tmap</h2>
+<h3>Interativo</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">tmap_mode</span>(<span class="at">mode =</span> <span class="st">"view"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>map_nz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<iframe src="img/map.html" width="960" height="400px" data-external="1">
+</iframe>
+</div>
+<div class="footer">
+<p><a href="https://r-tmap.github.io/tmap/">tmap</a></p>
 </div>
 </section></section>
 <section>
@@ -1273,6 +1451,44 @@ E = 1/30000000</p>
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
