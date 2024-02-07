@@ -24,6 +24,13 @@ format:
 <center>
 <br>
 ![](img/avatar.png)
+[`r icons::icon_style(icons::fontawesome("link"), fill = "#4e6a55")`](https://mauriciovancine.github.io/) 
+[`r icons::icon_style(icons::fontawesome("envelope", style = "solid"), fill = "#4e6a55")`](mailto:mauricio.vancine@gmail.com) 
+[`r icons::icon_style(icons::academicons("cv"), fill = "#4e6a55")`](https://mauriciovancine.github.io/cv/cv-mauricio-vancine-pt-academic-complete.html) 
+[`r icons::icon_style(icons::fontawesome("twitter"), fill = "#4e6a55")`](https://twitter.com/mauriciovancine) 
+[`r icons::icon_style(icons::fontawesome("github"), fill = "#4e6a55")`](https://github.com/mauriciovancine) 
+[`r icons::icon_style(icons::academicons("orcid"), fill = "#4e6a55")`](https://orcid.org/0000-0001-9650-7575) 
+[`r icons::icon_style(icons::academicons("lattes"), fill = "#4e6a55")`](http://lattes.cnpq.br/9761288418931193)
 </center>
 :::
 
@@ -845,13 +852,10 @@ map_nz
 
 ### Interativo
 
-```{r}
+```{r eval=FALSE}
 tmap_mode(mode = "view")
 map_nz
 ```
-
-<br>
-
 ```{r fig.align='center',echo=FALSE}
 knitr::include_url("img/map.html")
 ```
@@ -969,12 +973,18 @@ Agradecimentos:
 - [Felipe Sodré Barros](https://felipesbarros.github.io/pt/)
 - [Beatriz Milz](https://beatrizmilz.com/)
 - [Prof. Milton Cezar Ribeiro](https://leec.eco.br/people/prof-milton-cezar-ribeiro-miltinho/)
+- Alunos e alunas
 :::
 
 ::: {.column width="50%"}
+Contatos:
 <center>
-<br>
-<img src="img/gif_frogs.gif" style="width:100%"/>
+[`r icons::icon_style(icons::fontawesome("link"), fill = "#4e6a55")`](https://mauriciovancine.github.io/) 
+[`r icons::icon_style(icons::fontawesome("envelope", style = "solid"), fill = "#4e6a55")`](mailto:mauricio.vancine@gmail.com) 
+[`r icons::icon_style(icons::fontawesome("twitter"), fill = "#4e6a55")`](https://twitter.com/mauriciovancine) 
+[`r icons::icon_style(icons::fontawesome("github"), fill = "#4e6a55")`](https://github.com/mauriciovancine)
+
+<img src="img/gif_frogs.gif" style="width:80%"/>
 </center>
 
 :::
