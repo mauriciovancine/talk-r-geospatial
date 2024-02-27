@@ -11,6 +11,7 @@ library(tidyverse)
 library(sf)
 library(stars)
 library(terra)
+library(geobr)
 library(geodata)
 library(tmap)
 
@@ -122,7 +123,7 @@ plot(elevation)
 ## vetor ----
 
 ### terra ----
-pontos_terra_utm <- terra::project(x = pontos_terra, y = "EPSG:32723")
+pontos_terra_utm <- terra::project(x = pontos_terra, y = "EPSG:32723") # wgs84 utm 23s
 pontos_terra_utm
 
 plot(pontos_terra)
@@ -139,7 +140,7 @@ plot(pontos_sf_utm$geometry, pch = 20, axes = TRUE)
 mapbiomas_terra
 res(mapbiomas_terra)[1]*3600*30
 
-mapbiomas_terra_utm <- terra::project(x = mapbiomas_terra, y = "EPSG:32723", method = "near", res = 10)
+mapbiomas_terra_utm <- terra::project(x = mapbiomas_terra, y = "EPSG:32723", method = "near", res = 10, threads = TRUE)
 mapbiomas_terra_utm
 
 plot(mapbiomas_terra)
@@ -150,6 +151,8 @@ plot(mapbiomas_terra_utm)
 ## extrair valores para pontos ----
 plot(elevation)
 plot(pontos_terra, add = TRUE)
+
+terra::extract(elevation, pontos_terra)
 
 pontos_sf_elev <- pontos_sf %>% 
     dplyr::mutate(elev = terra::extract(elevation, pontos_terra, ID = FALSE)[, 1])
@@ -321,7 +324,7 @@ tmap_save(map, "03_data/map.png", width = 45, height = 30, units = "cm", dpi = 3
 tmap_mode(mode = "view")
 
 map_pontos <- tm_shape(campinas_sf) +
-    tm_polygons() +
+    tm_borders() +
     tm_shape(pontos_sf_elev_prec_temp) +
     tm_bubbles(fill = "elev",
                fill.scale = tm_scale_continuous(values = "-RdYlGn"),
