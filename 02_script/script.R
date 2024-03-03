@@ -149,7 +149,8 @@ plot(mapbiomas_terra_utm)
 # operacoes -------------------------------------------------
 
 ## extrair valores para pontos ----
-plot(elevation)
+plot(elevation, ext = campinas_terra)
+plot(campinas_terra, add = TRUE)
 plot(pontos_terra, add = TRUE)
 
 terra::extract(elevation, pontos_terra)
@@ -170,7 +171,7 @@ pontos_sf_elev_prec_temp <- pontos_sf_elev %>%
     dplyr::bind_cols(pontos_terra_prep, pontos_terra_temp)
 pontos_sf_elev_prec_temp
 
-## media dos rasters
+## soma e media dos rasters
 precipitation_annual <- terra::app(precipitation, sum, cores = 3)
 precipitation_annual
 plot(precipitation_annual)
@@ -180,8 +181,8 @@ temperature_mean
 plot(temperature_mean)
 
 pontos_sf_elev_prec_temp <- pontos_sf_elev %>% 
-    dplyr::mutate(prec = terra::extract(precipitation_annual, pontos_terra, ID = FALSE)[, 1],
-                  temp = terra::extract(temperature_mean, pontos_terra, ID = FALSE)[, 1],)
+    dplyr::mutate(prec_annual = terra::extract(precipitation_annual, pontos_terra, ID = FALSE)[, 1],
+                  temp_mean = terra::extract(temperature_mean, pontos_terra, ID = FALSE)[, 1],)
 pontos_sf_elev_prec_temp
 
 ## extensao e mascara ----
@@ -229,9 +230,9 @@ campinas_terra_buffer <- terra::buffer(campinas_terra, width = -1000)
 campinas_terra_buffer
 
 plot(campinas_terra)
-plot(campinas_terra_buffer, border = "red", add = TRUE)
+plot(campinas_terra_buffer, border = "forestgreen", add = TRUE)
 plot(pontos_terra, add = TRUE)
-plot(pontos_terra_buffer, add = TRUE)
+plot(pontos_terra_buffer, border = "red", add = TRUE)
 
 ## extrair dados para o buffer ----
 ambiental <- c(elevation_campinas_rea, precipitation_annual_campinas, temperature_mean_campinas)
@@ -278,7 +279,7 @@ map_uso <- tm_shape(mapbiomas_terra_campinas) +
 map_uso
 
 ### varios raster ----
-map_elev <- tm_shape(elevation_campinas_rea) +
+map_elev <- tm_shape(elevation_campinas) +
     tm_raster(col.scale = tm_scale_continuous(values = "-RdYlGn"),
               col.legend = tm_legend(title = "Elevação (m)", 
                                      position = tm_pos_in("left", "top"),

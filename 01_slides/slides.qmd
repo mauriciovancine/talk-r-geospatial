@@ -139,11 +139,11 @@ Relação entre a **medida gráfica** (representado no papel ou computador) e a 
 ::: {.column width="60%"}
 ::: nonincremental
 
-- d (distância gráfica): 0.01 m (1 cm)
+- d (distância gráfica): 0,01 m (1 cm)
 - D (distância real): 250 m
 
-- E (escala) = d / D = 0.01 m / 250 m
-- E = 1/25000 ou 1:25000
+- E (escala) = d / D = 0,01 m / 250 m
+- E = 1/25.000 ou 1:25.000
 
 <center>
 <img src="img/barra_escala.png" style="width:50%"/>
@@ -156,14 +156,14 @@ Relação entre a **medida gráfica** (representado no papel ou computador) e a 
 <center>
 <img src="img/escala_cut.png" style="width:100%"/>
 </center>
-E = 0.45/13,600,000  
-E = 1/30000000
+E = 0,45/13.600.000  
+E = 1/30.000.000
 :::
 :::
 
 ## Cartografia {.smaller}
 
-### Sistema de coordenadas geográfico (graus)
+### Sistema de coordenadas geográficas (graus)
 
 ::: columns
 ::: {.column width="40%"}
@@ -204,7 +204,7 @@ Latitude: -23.38972
 
 ## Cartografia {.smaller}
 
-### Sistema de coordenadas projetado (metros)
+### Sistema de coordenadas projetadas (metros)
 
 ::: columns
 ::: {.column width="50%"}
@@ -227,7 +227,7 @@ Latitude: -23.38972
 
 ## Cartografia {.smaller}
 
-### Sistema de coordenadas projetado (metros)
+### Sistema de coordenadas projetadas (metros)
 
 ::: columns
 ::: {.column width="30%"}
@@ -310,14 +310,14 @@ Datum + Sistema de Coordenadas (geográfico ou projetado)
 <br><br>
 
 ::: columns
-::: {.column width="60%"}
-- EPSG: 4326 [WGS84 Geográfico](https://epsg.io/4326)
-- EPSG: 4674 [SIRGAS2000 Geográfico](https://epsg.io/4674)
-- EPSG: 32723 [WGS84 UTM23S](https://epsg.io/32723)
-- EPSG: 31983 [SIRGAS2000 UTM23S](https://epsg.io/31983)
+::: {.column width="65%"}
+- EPSG:4326 ([WGS84 + Geográfico](https://epsg.io/4326))
+- EPSG:4674 ([SIRGAS2000 + Geográfico](https://epsg.io/4674))
+- EPSG:32723 ([WGS84 + UTM23S](https://epsg.io/32723))
+- EPSG:31983 ([SIRGAS2000 + UTM23S](https://epsg.io/31983))
 :::
 
-::: {.column width="40%"}
+::: {.column width="35%"}
 <br><br><br><br><br>
 <center>
 ![](img/espg-logo.png)
@@ -743,6 +743,17 @@ IDE (*Integrated Development Environment*) ou Ambiente de Desenvolvimento Integr
 [geobr](https://r-tmap.github.io/tmap/)
 :::
 
+# Dados
+
+## MapBiomas 10 m
+
+<center>
+<img src="img/mapbiomas_brasil.jpg" style="width:100%"/>
+</center>
+
+:::footer
+[MapBiomas](https://brasil.mapbiomas.org/)
+:::
 
 # Reprojeção
 
@@ -875,6 +886,40 @@ knitr::include_url("img/map.html")
 
 :::footer
 [tmap](https://r-tmap.github.io/tmap/)
+:::
+
+# Aplicações
+
+## Dinâmica espaço-temporal da vegetação da Mata Atlântica
+
+<br>
+<center>
+<img src="img/vancine_etal_2024.png" style="width:100%"/>
+</center>
+
+:::footer
+[Vancine et al. (2024)](https://doi.org/10.1016/j.biocon.2024.110499)
+:::
+
+## Dinâmica espaço-temporal da vegetação da Mata Atlântica
+
+::: columns
+::: {.column width="50%"}
+<br>
+<center>
+<img src="img/fig04_forest_trimmed.png" style="width:100%"/>
+</center>
+:::
+
+::: {.column width="50%"}
+<center>
+<img src="img/fig02_2020_forest_trimmed.png" style="width:70%"/>
+</center>
+:::
+:::
+
+:::footer
+[Vancine et al. (2024)](https://doi.org/10.1016/j.biocon.2024.110499)
 :::
 
 # Para saber mais
