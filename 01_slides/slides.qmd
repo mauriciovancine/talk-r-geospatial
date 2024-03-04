@@ -13,7 +13,7 @@ format:
     chalkboard: true
     execute:
       echo: true
-      eval: false
+      eval: true
       warning: false
       message: false
 ---
