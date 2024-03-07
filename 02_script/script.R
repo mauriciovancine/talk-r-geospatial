@@ -1,5 +1,5 @@
 #' ----
-#' theme: analise de dados geoespaciais no r
+#' tema: analise de dados geoespaciais no r
 #' autor: mauricio vancine
 #' data: 2024-03-12
 #' ----
@@ -16,7 +16,7 @@ library(geodata)
 library(tmap)
 
 # options
-options(scipen = 1e3)
+options(scipen = 1e3) # numeros não cientificos (1e3)
 
 # importar dados ----------------------------------------------------------
 
@@ -34,9 +34,12 @@ plot(pontos[, 2:3], pch = 20, cex = 2)
 ## pontos ----
 
 ### terra ----
+
 # transformar
 pontos_terra <- terra::vect(as.matrix(pontos[, 2:3]), crs = "EPSG:4326")
 pontos_terra
+
+plot(pontos_terra)
 
 # importar
 pontos_terra <- terra::vect("03_data/pontos_campinas.gpkg")
@@ -46,9 +49,13 @@ pontos_terra
 plot(pontos_terra)
 
 ### sf ----
+
 # transformar
 pontos_sf <- sf::st_as_sf(pontos, coords = c("longitude", "latitude"), crs = 4326)
 pontos_sf
+
+plot(pontos_sf)
+plot(pontos_sf$geometry)
 
 # importar
 pontos_sf <- sf::st_read("03_data/pontos_campinas.gpkg")
@@ -56,7 +63,6 @@ pontos_sf <- sf::st_read("03_data/pontos_campinas.shp")
 pontos_sf
 
 plot(pontos_sf)
-plot(pontos_sf$geometry)
 
 ### tabela de atributos ----
 terra::geom(pontos_terra)
@@ -123,28 +129,40 @@ plot(elevation)
 ## vetor ----
 
 ### terra ----
+terra::crs(pontos_terra)
+
 pontos_terra_utm <- terra::project(x = pontos_terra, y = "EPSG:32723") # wgs84 utm 23s
 pontos_terra_utm
 
-plot(pontos_terra)
-plot(pontos_terra_utm)
+terra::crs(pontos_terra_utm)
+
+plot(pontos_terra, main = "WGS84 Geo")
+plot(pontos_terra_utm, main = "WGS84 UTM 23S")
 
 ### sf ----
+sf::st_crs(pontos_sf)
+
 pontos_sf_utm <- sf::st_transform(pontos_sf, crs = 32723)
 pontos_sf_utm
 
-plot(pontos_sf$geometry, pch = 20, axes = TRUE)
-plot(pontos_sf_utm$geometry, pch = 20, axes = TRUE)
+sf::st_crs(pontos_sf_utm)
+
+plot(pontos_sf$geometry, pch = 20, axes = TRUE, main = "WGS84 Geo")
+plot(pontos_sf_utm$geometry, pch = 20, axes = TRUE, main = "WGS84 UTM 23S")
 
 ## raster ----
+terra::crs(mapbiomas_terra)
+
 mapbiomas_terra
 res(mapbiomas_terra)[1]*3600*30
 
 mapbiomas_terra_utm <- terra::project(x = mapbiomas_terra, y = "EPSG:32723", method = "near", res = 10, threads = TRUE)
 mapbiomas_terra_utm
 
-plot(mapbiomas_terra)
-plot(mapbiomas_terra_utm)
+terra::crs(mapbiomas_terra_utm)
+
+plot(mapbiomas_terra, main = "WGS84 Geo")
+plot(mapbiomas_terra_utm, main = "WGS84 UTM 23S")
 
 # operacoes -------------------------------------------------
 
@@ -152,6 +170,7 @@ plot(mapbiomas_terra_utm)
 plot(elevation, ext = campinas_terra)
 plot(campinas_terra, add = TRUE)
 plot(pontos_terra, add = TRUE)
+text(pontos_terra, col = "red", cex = 1, pos = 1)
 
 terra::extract(elevation, pontos_terra)
 
@@ -182,8 +201,26 @@ plot(temperature_mean)
 
 pontos_sf_elev_prec_temp <- pontos_sf_elev %>% 
     dplyr::mutate(prec_annual = terra::extract(precipitation_annual, pontos_terra, ID = FALSE)[, 1],
-                  temp_mean = terra::extract(temperature_mean, pontos_terra, ID = FALSE)[, 1],)
+                  temp_mean = terra::extract(temperature_mean, pontos_terra, ID = FALSE)[, 1])
 pontos_sf_elev_prec_temp
+
+ggplot(pontos_sf_elev_prec_temp, aes(x = elev,  y = prec_annual)) +
+    stat_smooth(method = "lm") +
+    geom_point(size = 3, color = "gray10") +
+    labs(x = "Elevação (m)", y = "Precipitação anual (mm)") +
+    theme_classic(base_size = 20)
+
+ggplot(pontos_sf_elev_prec_temp, aes(x = elev,  y = temp_mean)) +
+    stat_smooth(method = "lm") +
+    geom_point(size = 3, color = "gray10") +
+    labs(x = "Elevação (m)", y = "Temperatural média anual (ºC)") +
+    theme_classic(base_size = 20)
+
+ggplot(pontos_sf_elev_prec_temp, aes(x = temp_mean,  y = prec_annual)) +
+    stat_smooth(method = "lm") +
+    geom_point(size = 3, color = "gray10") +
+    labs(x = "Temperatural média anual (ºC)", y = "Precipitação anual (mm)") +
+    theme_classic(base_size = 20)
 
 ## extensao e mascara ----
 mapbiomas_terra_campinas <- terra::crop(mapbiomas_terra, campinas_terra, mask = TRUE)
