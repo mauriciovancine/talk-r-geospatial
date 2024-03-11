@@ -948,12 +948,14 @@ knitr::include_url("img/map.html")
 
 ::: columns
 ::: {.column width="40%"}
+<br><br>
 <center>
-<img src="img/aer.jpeg" href="https://analises-ecologicas.com/" style="width:90%"/>
+<img src="img/aer.jpeg" href="https://analises-ecologicas.com/" style="width:80%"/>
 </center>
 :::
 
 ::: {.column width="60%"}
+<br>
 
 - 15 capítulos
 
@@ -980,12 +982,14 @@ knitr::include_url("img/map.html")
 
 ::: columns
 ::: {.column width="40%"}
+<br><br>
 <center>
-<img src="img/geo.png" href="https://r.geocompx.org/" style="width:90%"/>
+<img src="img/geo.png" href="https://r.geocompx.org/" style="width:75%"/>
 </center>
 :::
 
 ::: {.column width="60%"}
+<br>
 
 - 16 capítulos
 
@@ -1006,13 +1010,13 @@ knitr::include_url("img/map.html")
 
 ::: columns
 ::: {.column width="40%"}
+<br><br>
 <center>
-<img src="img/sds.jpg" href="https://r-spatial.org/book/" style="width:88%"/>
+<img src="img/sds.jpg" href="https://r-spatial.org/book/" style="width:75%"/>
 </center>
 :::
 
 ::: {.column width="60%"}
-
 - 17 capítulos
 
 - Dados espaciais (coordenadas, geometrias, atributos e cubos)
@@ -1026,6 +1030,110 @@ knitr::include_url("img/map.html")
 
 :::footer
 [Pebesma & Bivand (2023)](https://r-spatial.org/book/)
+:::
+
+## Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny
+
+::: columns
+::: {.column width="40%"}
+<br>
+<center>
+<img src="img/moraga1.jpg" href="https://www.paulamoraga.com/book-geospatial/" style="width:75%"/>
+</center>
+:::
+
+::: {.column width="60%"}
+
+<br>
+
+- 16 capítulos
+
+- Dados geoespaciais de saúde
+
+- Modelagem e visualização
+
+- Comunicação dos resultados
+
+:::
+:::
+
+:::footer
+[Moraga(2019)](https://www.paulamoraga.com/book-geospatial/)
+:::
+
+## Spatial Statistics for Data Science: Theory and Practice with R
+
+::: columns
+::: {.column width="40%"}
+<br>
+<center>
+<img src="img/moraga2.jpg" href="https://www.paulamoraga.com/book-spatial/" style="width:75%"/>
+</center>
+:::
+
+::: {.column width="60%"}
+
+<br>
+
+- 23 capítulos
+
+- Dados espaciais
+
+- Dados aéreos
+
+- Dados geoestatísticos
+
+- Padrões de pontos espaciais
+
+:::
+:::
+
+:::footer
+[Moraga (2023)](https://www.paulamoraga.com/book-spatial/)
+:::
+
+## Brazil Data Cube
+
+<center>
+<img src="img/bdc1.png" style="width:60%"/>
+</center>
+
+:::footer
+[Brazil Data Cube](http://www.brazildatacube.org)
+:::
+
+## Brazil Data Cube
+
+<center>
+<img src="img/bdc2.png" style="width:85%"/>
+</center>
+
+:::footer
+[Brazil Data Cube](http://www.brazildatacube.org)
+:::
+
+## Brazil Data Cube
+
+### SITS – Satellite Image Time Series Analysis for Earth Observation Data Cubes
+
+::: columns
+::: {.column width="40%"}
+<br>
+<center>
+<img src="img/bdc_sits1.png" style="width:100%"/>
+</center>
+:::
+
+::: {.column width="60%"}
+<center>
+<img src="img/bdc_sits2.png" style="width:80%"/>
+</center>
+
+:::
+:::
+
+:::footer
+[sits](http://www.brazildatacube.org/sits-satellite-image-time-series/)
 :::
 
 ## Trabalhando com dados espaciais
@@ -1062,7 +1170,8 @@ Agradecimentos:
 
 - [Felipe Sodré Barros](https://felipesbarros.github.io/pt/)
 - [Beatriz Milz](https://beatrizmilz.com/)
-- [Prof. Milton Cezar Ribeiro](https://leec.eco.br/people/prof-milton-cezar-ribeiro-miltinho/)
+- [Prof. Milton Cezar Ribeiro (UNESP)](https://leec.eco.br/people/prof-milton-cezar-ribeiro-miltinho/)
+- [Prof. Gilberto Camara (INPE)](https://gilbertocamara.org/)
 - Alunos e alunas
 :::
 
